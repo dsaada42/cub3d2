@@ -4,11 +4,11 @@ SO ./textures/wall.xpm
 
 WE ./textures/wall.xpm
 
-EA ./textures/wall.xpm
+EA a.xpm
 
 F 220, 110, 187
 
-C 255,255,   255
+C 1,1,1
 
 1111111111111 111111111111
 1000000000001 100000000001

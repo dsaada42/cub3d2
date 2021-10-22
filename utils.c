@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:46:42 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/21 04:18:05 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/22 17:42:19 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	str_equal(const char *s1, const char *s2)
 int	ft_is_valid(char c)
 {
 	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
-		|| (c >= 'a' && c <= 'z') || (c == '_'))
+		|| (c >= 'a' && c <= 'z') || (c == '_') || (c == '/'))
 		return (SUCCESS);
 	else
 		return (FAILURE);
@@ -46,3 +46,18 @@ int     is_wspace(char c)
                 return (0);
 }
 
+int     ft_isprint(int c)
+{
+        if (c >= ' ' && c <= '~')
+                return (1);
+        else
+                return (0);
+}
+
+int     ft_isdigit(int c)
+{
+        if (c <= '9' && c >= '0')
+                return (1);
+        else
+                return (0);
+}
