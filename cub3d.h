@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:17:25 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/22 20:23:22 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/23 20:27:19 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,17 @@ typedef struct	s_env
 	char		*east;
 	char		*west;
 	t_img		*tex[4];
-	int		**map;
+	char		**map;
 	t_list_garb	*garb;
+	double		posx;
+	double		posy;
+	double		dirx;
+	double		diry;
 }		t_env;
 
+//init.c
+int     init_player(t_env *v, int x, int y, int a);
+int     init_env(t_env *v);
 //list.c
 t_list  *init_list(void);
 int     add_line_list(t_list *list, char *buffer);
@@ -107,7 +114,19 @@ int     is_color(t_line *el);
 t_list_garb     *init_list_garb(void);
 int     add_garb(t_list_garb *list, void *ptr);
 int     free_garb(t_list_garb *list);
+//map.c
+int     parse_map(t_list *list, t_env *v);
+int     get_map_size(t_env *v, t_list *list);
+void    free_map(t_env *v);
+//map_check.c
+int     check_block(t_env *v, int x, int y);
+int     check_sides(t_env *v);
+int     check_surround(t_env *v, int x, int y);
+int     check_closed(t_env *v);
+int     check_map(t_env *v);
 
+
+int     print_full_map(t_env *v);
 int     print_list(t_list *list);
 
 #endif

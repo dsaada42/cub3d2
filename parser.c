@@ -6,25 +6,11 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:30:39 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/22 20:23:19 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/23 20:27:06 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	init_env(t_env *v)
-{
-	v->north = NULL;
-	v->south = NULL;
-	v->east = NULL;
-	v->west = NULL;
-	v->floor = 0;
-	v->ceiling = 0;
-	v->garb = init_list_garb();
-	if (v->garb == NULL)
-		return (MALLOC_ERROR);
-	return (SUCCESS);
-}
 
 int	get_cub_file(char *str, t_list *list)
 {
@@ -154,75 +140,6 @@ int	parse_data(t_list *list, t_env *v)
 		return (FAILURE);
 }
 
-int     print_full_map(t_env *v)
-{
-        int x;
-        int y;
-
-        y = -1;
-        while (++y < v->map_height)
-        {
-                x = -1;
-                while (++x < v->map_width)
-                {
-                        if (v->map[x][y] == -16)
-                                printf("  ");
-                        else
-                                printf(" %d", v->map[x][y]);
-                }
-                printf("\n");
-        }
-        return (0);
-}
-
-int	parse_map(t_list *list, t_env *v)
-{
-	int     x;
-        int     y;
-        t_line  *current;
-
-        v->map = (int**)malloc(sizeof(int*) * v->map_width);
-	if (v->map == NULL)
-                return (FAILURE);
-        x = -1;
-        while (++x < v->map_width)
-        {
-                v->map[x] = (int*)malloc(sizeof(int) * v->map_height);
-		if (v->map[x] == NULL)
-                       return (FAILURE);
-                current = list->start;
-                y = 0;
-                while (current != NULL)
-                {
-                        if (current->size <= x)
-                                v->map[x][y] = ' ' - 48;
-                        else
-                                v->map[x][y] = current->buffer[x] - 48;
-                        current = current->next;
-                        y++;
-                }
-
-        }
-        return (SUCCESS);
-}
-
-int     get_map_size(t_env *v, t_list *list)
-{
-        t_line  *current;
-
-        v->map_width = 0;
-        v->map_height = 0;
-        current = list->start;
-        while(current != NULL)
-        {
-                v->map_height++;
-                if (current->size > v->map_width)
-                        v->map_width = current->size;
-                current = current->next;
-        }
-	return (SUCCESS);
-}
-
 int	parser(char *param, t_env *v)
 {
 	t_list	*list;
@@ -243,12 +160,15 @@ int	parser(char *param, t_env *v)
 	get_map_size(v, list);
 	if (parse_map(list, v) == FAILURE)
 	{
+		printf("Error inside map\n");
 		free_list(list);
 		free_garb(v->garb);
+		free_map(v);
 		return (FAILURE);
 	}
 	print_full_map(v);
 	free_list(list);
 	free_garb(v->garb);
+	free_map(v);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: dsaada <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 00:15:00 by dsaada            #+#    #+#              #
-#    Updated: 2021/10/22 17:51:26 by dsaada           ###   ########.fr        #
+#    Updated: 2021/10/23 20:12:57 by dsaada           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,14 @@ CFLAGS = -Wall -Wextra -Werror
 DEBUG = -g3 -fsanitize=address
 
 SRC = main.c\
+      init.c\
       utils.c\
       parser.c\
       parser_utils.c\
       list.c\
       garb.c\
+      map.c\
+      map_check.c\
       get_next_line.c\
       get_next_line_utils.c
 
