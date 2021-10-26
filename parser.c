@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:30:39 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/23 20:27:06 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/26 15:53:49 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,9 +166,6 @@ int	parser(char *param, t_env *v)
 		free_map(v);
 		return (FAILURE);
 	}
-	print_full_map(v);
 	free_list(list);
-	free_garb(v->garb);
-	free_map(v);
 	return (SUCCESS);
 }

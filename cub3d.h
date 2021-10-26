@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:17:25 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/23 20:27:19 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/26 15:53:45 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 # include <stdio.h>
 # include <stdlib.h>
-# include <mlx.h>
+# include "./mlx_linux/mlx.h"
 # include <math.h>
 # include "get_next_line.h"
 # define FAILURE -1
@@ -58,7 +58,7 @@ typedef struct  s_list
 typedef struct	s_img
 {
 	void	*img;
-	char	*addr;
+	int	*addr;
 	int	bpp;
 	int	line_length;
 	int	endian;
@@ -79,7 +79,7 @@ typedef struct	s_env
 	char		*south;
 	char		*east;
 	char		*west;
-	t_img		*tex[4];
+	t_img		tex[4];
 	char		**map;
 	t_list_garb	*garb;
 	double		posx;
@@ -124,7 +124,10 @@ int     check_sides(t_env *v);
 int     check_surround(t_env *v, int x, int y);
 int     check_closed(t_env *v);
 int     check_map(t_env *v);
-
+//get_textures.c
+int     f_exist(char *str);
+int     check_tex_exist(t_env *v);
+int     get_textures(t_env *v);
 
 int     print_full_map(t_env *v);
 int     print_list(t_list *list);

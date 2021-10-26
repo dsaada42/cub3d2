@@ -4,7 +4,7 @@ SO ./textures/wall.xpm
 
 WE ./textures/wall.xpm
 
-EA a.xpm
+EA ./textures/wall.xpm
 
 F 220, 110, 187
 
