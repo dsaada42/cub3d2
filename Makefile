@@ -6,7 +6,7 @@
 #    By: dsaada <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 00:15:00 by dsaada            #+#    #+#              #
-#    Updated: 2021/10/26 15:53:39 by dsaada           ###   ########.fr        #
+#    Updated: 2021/10/26 16:32:55 by dsaada           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ SRC = main.c\
       map_check.c\
       get_textures.c\
       get_next_line.c\
-      get_next_line_utils.c
+      get_next_line_utils.c\
+      raycast.c\
+      drawing.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -42,7 +44,7 @@ OBJ = $(SRC:.c=.o)
 
 $(NAME): $(OBJ)
 	make -C $(MLX_PATH)
-	$(CC) $(OBJ) $(DEBUG) $(MLX_FLAG) -o $(NAME)
+	$(CC) $(OBJ) $(MLX_FLAG) -o $(NAME)
 
 all: $(NAME)
 

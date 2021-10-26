@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:17:25 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/26 15:53:45 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/26 16:32:58 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define LEFT 65361
 # define RIGHT 65363
 # define ESCAPE 65307
-
+# define RED 0x00FF0000
 
 typedef	struct	s_garb
 {
@@ -58,7 +58,7 @@ typedef struct  s_list
 typedef struct	s_img
 {
 	void	*img;
-	int	*addr;
+	char	*addr;
 	int	bpp;
 	int	line_length;
 	int	endian;
@@ -70,9 +70,17 @@ typedef struct	s_env
 {
 	void		*mlx;
 	void		*win;
-	t_img		*img;
+	t_img		img;
+	int             mapx;
+        int             mapy;
+        int             incx;
+        int             incy;
 	int		floor;
+	int		side;
+	int             first_px;
+        int             last_px;
 	int		ceiling;
+	int             w_height;
 	int		map_width;
 	int		map_height;
 	char		*north;
@@ -82,10 +90,21 @@ typedef struct	s_env
 	t_img		tex[4];
 	char		**map;
 	t_list_garb	*garb;
+	double          wall_x;
 	double		posx;
 	double		posy;
 	double		dirx;
 	double		diry;
+	double          planex;
+        double          planey;
+        double          camerax;
+        double          ray_dirx;
+        double          ray_diry;
+        double          sidex;
+        double          sidey;
+        double          deltax;
+        double          deltay;
+        double          dist;
 }		t_env;
 
 //init.c
@@ -128,6 +147,12 @@ int     check_map(t_env *v);
 int     f_exist(char *str);
 int     check_tex_exist(t_env *v);
 int     get_textures(t_env *v);
+//raycast.c
+int     get_dist(t_env *v);
+//drawing.c
+void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void    draw_px_col(t_env *v, int cpt);
+
 
 int     print_full_map(t_env *v);
 int     print_list(t_list *list);

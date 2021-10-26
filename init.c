@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 19:57:31 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/26 15:53:33 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/26 16:33:27 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,16 @@ int     init_player(t_env *v, int x, int y, int a)
         if (a == 'W')
                 v->dirx = -1;
         v->map[x][y] = '0';
-        printf("player initialised in X = %d, Y = %d\n", x, y);
+	if (v->dirx == 0)
+        {
+                v->planex = -0.66 * v->diry;
+                v->planey = 0;
+        }
+        else
+        {
+                v->planex = 0;
+                v->planey = 0.66 * v->dirx;
+        }
         return (0);
 }
 
