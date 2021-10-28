@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:17:25 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 02:39:52 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/28 19:17:31 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,8 @@ int     raycast(t_env *v);
 
 
 //drawing.c
-void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void    draw_px_col(t_env *v, int cpt);
+void    draw_tex_col(t_env *v, int cpt, char dir);
 
 
 int     print_full_map(t_env *v);

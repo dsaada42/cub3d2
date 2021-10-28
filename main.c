@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:15:44 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 04:02:39 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/28 19:17:37 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,11 @@ int	main(int argc, char **argv)
 	if (parser(argv[1], &v) == FAILURE)
 		return (FAILURE);
 	if (get_textures(&v) == FAILURE)
+	{
+		free_map(&v);
+		free_garb(v.garb);
 		return (FAILURE);
+	}
 	generate_next_frame(&v);
 	mlx_hook(v.win, 2, 1L << 0, keypress_handler, &v);
 	mlx_loop(v.mlx);

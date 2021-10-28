@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:05:13 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 04:07:25 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/28 19:17:41 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,16 @@ int	raycast(t_env *v)
 		init_ray(v, cpt);
 		search_wall(v);
 		get_dist(v);
-		draw_px_col(v, cpt);
+		//draw_px_col(v, cpt);
 		//point d intersection avec le mur -> (posx + sideX , posy + sideY)
-		/*if (v->side == 0 && v->ray_dirx > 0)
-			draw_px_col2(v, cpt, 'N');
+		if (v->side == 0 && v->ray_dirx > 0)
+			draw_tex_col(v, cpt, 'E');
 		else if (v->side == 0 && v->ray_dirx <= 0)
-			draw_px_col2(v, cpt, 'S');
+			draw_tex_col(v, cpt, 'W');
 		else if (v->side == 1 && v->ray_diry > 0)
-			draw_px_col2(v, cpt, 'E');
+			draw_tex_col(v, cpt, 'S');
 		else if (v->side == 1 && v->ray_diry <= 0)
-			draw_px_col2(v, cpt, 'W');*/
+			draw_tex_col(v, cpt, 'N');
 	}
 	return (SUCCESS);
 }
