@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:46:42 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/22 17:42:19 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/28 03:54:31 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,26 @@ int	ft_is_valid(char c)
 		return (FAILURE);
 }
 
-int     is_wspace(char c)
+int	is_wspace(char c)
 {
-        if (c == ' ' || c == '\t' || c == '\v')
-                return (1);
-        else
-                return (0);
+	if (c == ' ' || c == '\t' || c == '\v')
+		return (1);
+	else
+		return (0);
 }
 
-int     ft_isprint(int c)
+int	ft_isprint(int c)
 {
-        if (c >= ' ' && c <= '~')
-                return (1);
-        else
-                return (0);
+	if (c >= ' ' && c <= '~')
+		return (1);
+	else
+		return (0);
 }
 
-int     ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-        if (c <= '9' && c >= '0')
-                return (1);
-        else
-                return (0);
+	if (c <= '9' && c >= '0')
+		return (1);
+	else
+		return (0);
 }

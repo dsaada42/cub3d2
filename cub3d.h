@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:17:25 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/26 16:32:58 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/28 02:39:52 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct	s_env
 }		t_env;
 
 //init.c
-int     init_player(t_env *v, int x, int y, int a);
+void	init_player(t_env *v, int x, int y, int a);
 int     init_env(t_env *v);
 //list.c
 t_list  *init_list(void);
@@ -148,7 +148,9 @@ int     f_exist(char *str);
 int     check_tex_exist(t_env *v);
 int     get_textures(t_env *v);
 //raycast.c
-int     get_dist(t_env *v);
+int     raycast(t_env *v);
+
+
 //drawing.c
 void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void    draw_px_col(t_env *v, int cpt);

@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 13:59:08 by dsaada            #+#    #+#             */
-/*   Updated: 2020/06/25 14:00:01 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/28 04:06:51 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ char	*ft_strchr(const char *s, int c)
 	{
 		if (s[i] == c)
 		{
-			return (char*)(s + i);
+			return ((char *)(s + i));
 		}
 		i++;
 	}
 	if (c == '\0')
-		return (char*)(s + i);
+		return ((char *)(s + i));
 	return (NULL);
 }
 

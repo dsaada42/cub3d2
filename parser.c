@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:30:39 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/26 15:53:49 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/28 03:52:31 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_cub_file(char *str, t_list *list)
 {
-	int	fd;
+	int		fd;
 	char	*buffer;
 
 	if (check_file(str) != SUCCESS)
@@ -40,29 +40,29 @@ int	get_cub_file(char *str, t_list *list)
 
 int	parse_path(t_line *el, t_env *v)
 {
-	int     i;
-        int     j;
-        int     cpt;
-        char    *res;
+	int		i;
+	int		j;
+	int		cpt;
+	char	*res;
 
-        cpt = 0;
-        j = 0;
-        i = 2;
-        while (el->buffer[i] && is_wspace(el->buffer[i]))
-                i++;
-        while (el->buffer[i + cpt] && ft_isprint(el->buffer[i + cpt]) == SUCCESS && !(is_wspace(el->buffer[i + cpt])))
-                cpt++;
-        res = malloc(sizeof(char) * (cpt + 1));
+	cpt = 0;
+	j = 0;
+	i = 2;
+	while (el->buffer[i] && is_wspace(el->buffer[i]))
+		i++;
+	while (el->buffer[i + cpt] && ft_isprint(el->buffer[i + cpt]) == SUCCESS && !(is_wspace(el->buffer[i + cpt])))
+		cpt++;
+	res = malloc(sizeof(char) * (cpt + 1));
 	if (res == NULL)
-                return (FAILURE);
+		return (FAILURE);
 	if (add_garb(v->garb, res) == FAILURE)
 		return (FAILURE);
-        while(j < cpt)
-        {
-                res[j] = el->buffer[i + j];
-                j++;
-        }
-        res[j] = '\0';
+	while (j < cpt)
+	{
+		res[j] = el->buffer[i + j];
+		j++;
+	}
+	res[j] = '\0';
 	if (check_tex(res) == FAILURE)
 		return (FAILURE);
 	if (el->buffer[0] == 'N')
@@ -70,48 +70,48 @@ int	parse_path(t_line *el, t_env *v)
 	else if (el->buffer[0] == 'S')
 		v->south = res;
 	else if (el->buffer[0] == 'E')
-        	v->east = res;
+		v->east = res;
 	else
 		v->west = res;
-        return (SUCCESS);
+	return (SUCCESS);
 }
 
 //___________________FONCTION A RECODER POUR LA SECURISER_________________
 int	parse_color(t_line *el, t_env *v)
 {
-	int     i;
-        int     res[3];
-        int     cpt;
+	int	i;
+	int	res[3];
+	int	cpt;
 
-        i = 1;
-        cpt = 0;
-        while (cpt < 3)
-        {
-                res[cpt] = 0;
-                while (is_wspace(el->buffer[i]))
-                        i++;
-                while (ft_isdigit(el->buffer[i]))
-                {
-                        res[cpt] = res[cpt] * 10 + el->buffer[i] - '0';
-                        i++;
-                }
-                if (el->buffer[i] == ',')
-                        i++;
-                else if (cpt < 2)
-                        return (FAILURE);
-                cpt++;
-        }
+	i = 1;
+	cpt = 0;
+	while (cpt < 3)
+	{
+		res[cpt] = 0;
+		while (is_wspace(el->buffer[i]))
+			i++;
+		while (ft_isdigit(el->buffer[i]))
+		{
+			res[cpt] = res[cpt] * 10 + el->buffer[i] - '0';
+			i++;
+		}
+		if (el->buffer[i] == ',')
+			i++;
+		else if (cpt < 2)
+			return (FAILURE);
+		cpt++;
+	}
 	if (el->buffer[0] == 'C')
-        	v->ceiling = res[2] + 256 * res[1] + 256 * 256 * res[0];
+		v->ceiling = res[2] + 256 * res[1] + 256 * 256 * res[0];
 	else
 		v->floor = res[2] + 256 * res[1] + 256 * 256 * res[0];
-        return (SUCCESS);
+	return (SUCCESS);
 }
 
 int	parse_data(t_list *list, t_env *v)
 {
-	t_line *el;
-	int	flag;
+	t_line	*el;
+	int		flag;
 
 	flag = 0;
 	el = list->start;
@@ -132,7 +132,7 @@ int	parse_data(t_list *list, t_env *v)
 			el = list_del_el(list, el);
 		}
 		else
-			flag = 1;	
+			flag = 1;
 	}
 	if (flag == 1 && check_args(v) == SUCCESS)
 		return (SUCCESS);
@@ -145,8 +145,8 @@ int	parser(char *param, t_env *v)
 	t_list	*list;
 
 	list = init_list();
-        if (!list)
-                return (MALLOC_ERROR);
+	if (!list)
+		return (MALLOC_ERROR);
 	init_env(v);
 	if (get_cub_file(param, list) == FAILURE)
 		return (FAILURE);

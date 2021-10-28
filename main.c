@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:15:44 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/26 16:33:06 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/10/28 04:02:39 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int	init_vars(t_env *v)
 	return (SUCCESS);
 }
 
-int             generate_next_frame(t_env *v)
+int	generate_next_frame(t_env *v)
 {
-        v->img.img = mlx_new_image(v->mlx, WIDTH, HEIGHT);
-        v->img.addr = mlx_get_data_addr(v->img.img, &v->img.bpp,
-                &v->img.line_length, &v->img.endian);
-        get_dist(v);
+	v->img.img = mlx_new_image(v->mlx, WIDTH, HEIGHT);
+	v->img.addr = mlx_get_data_addr(v->img.img, &v->img.bpp,
+			&v->img.line_length, &v->img.endian);
+	raycast(v);
 	mlx_put_image_to_window(v->mlx, v->win, v->img.img, 0, 0);
-        mlx_destroy_image(v->mlx, v->img.img);
-        return (SUCCESS);
+	mlx_destroy_image(v->mlx, v->img.img);
+	return (SUCCESS);
 }
 
 int	keypress_handler(int keycode, t_env *v)
@@ -44,52 +44,52 @@ int	keypress_handler(int keycode, t_env *v)
 	else
 	{
 		if (keycode == W)
-                {
-                        if (v->map[(int)(v->posx + v->dirx)][(int)(v->posy)] == '0')
-                                v->posx += v->dirx / 10;
-                        if (v->map[(int)(v->posx)][(int)(v->posy + v->diry)] == '0')
-                                v->posy += v->diry / 10;
-                }
-                else if (keycode == S)
-                {
-                        if (v->map[(int)(v->posx - v->dirx)][(int)(v->posy)] == '0')
-                                v->posx -= v->dirx / 10;
-                        if (v->map[(int)(v->posx)][(int)(v->posy - v->diry)] == '0')
-                                v->posy -= v->diry / 10;
-                }
-                else if (keycode == D)
-                {
-                        if (v->map[(int)(v->posx - v->diry)][(int)(v->posy)] == '0')
-                                v->posx += -v->diry / 10;
-                        if (v->map[(int)(v->posx)][(int)(v->posy + v->dirx)] == '0')
-                                v->posy += v->dirx / 10;
-                }
-                else if (keycode == A)
-                {
-                        if (v->map[(int)(v->posx + v->diry)][(int)(v->posy)] == '0')
-                                v->posx += v->diry / 10;
-                        if (v->map[(int)(v->posx)][(int)(v->posy - v->dirx)] == '0')
-                                v->posy += -v->dirx / 10;
-                }
-                else if (keycode == RIGHT)
-                {
-                        old_dirx = v->dirx;
-                        v->dirx = v->dirx * cos(ROTSPEED) - v->diry * sin(ROTSPEED);
-                        v->diry = old_dirx * sin(ROTSPEED) + v->diry * cos(ROTSPEED);
-                        old_planex = v->planex;
-                        v->planex = v->planex * cos(ROTSPEED) - v->planey * sin(ROTSPEED);
-                        v->planey = old_planex * sin(ROTSPEED) + v->planey * cos(ROTSPEED);
-                }
-                else if (keycode == LEFT)
-                {
-                        old_dirx = v->dirx;
-                        v->dirx = v->dirx * cos(-ROTSPEED) - v->diry * sin(-ROTSPEED);
-                        v->diry = old_dirx * sin(-ROTSPEED) + v->diry * cos(-ROTSPEED);
-                        old_planex = v->planex;
-                        v->planex = v->planex * cos(-ROTSPEED) - v->planey * sin(-ROTSPEED);
-                        v->planey = old_planex * sin(-ROTSPEED) + v->planey * cos(-ROTSPEED);
-                }
-                generate_next_frame(v);
+		{
+			if (v->map[(int)(v->posx + v->dirx)][(int)(v->posy)] == '0')
+				v->posx += v->dirx / 10;
+			if (v->map[(int)(v->posx)][(int)(v->posy + v->diry)] == '0')
+				v->posy += v->diry / 10;
+		}
+		else if (keycode == S)
+		{
+			if (v->map[(int)(v->posx - v->dirx)][(int)(v->posy)] == '0')
+				v->posx -= v->dirx / 10;
+			if (v->map[(int)(v->posx)][(int)(v->posy - v->diry)] == '0')
+				v->posy -= v->diry / 10;
+		}
+		else if (keycode == D)
+		{
+			if (v->map[(int)(v->posx - v->diry)][(int)(v->posy)] == '0')
+				v->posx += -v->diry / 10;
+			if (v->map[(int)(v->posx)][(int)(v->posy + v->dirx)] == '0')
+				v->posy += v->dirx / 10;
+		}
+		else if (keycode == A)
+		{
+			if (v->map[(int)(v->posx + v->diry)][(int)(v->posy)] == '0')
+				v->posx += v->diry / 10;
+			if (v->map[(int)(v->posx)][(int)(v->posy - v->dirx)] == '0')
+				v->posy += -v->dirx / 10;
+		}
+		else if (keycode == RIGHT)
+		{
+			old_dirx = v->dirx;
+			v->dirx = v->dirx * cos(ROTSPEED) - v->diry * sin(ROTSPEED);
+			v->diry = old_dirx * sin(ROTSPEED) + v->diry * cos(ROTSPEED);
+			old_planex = v->planex;
+			v->planex = v->planex * cos(ROTSPEED) - v->planey * sin(ROTSPEED);
+			v->planey = old_planex * sin(ROTSPEED) + v->planey * cos(ROTSPEED);
+		}
+		else if (keycode == LEFT)
+		{
+			old_dirx = v->dirx;
+			v->dirx = v->dirx * cos(-ROTSPEED) - v->diry * sin(-ROTSPEED);
+			v->diry = old_dirx * sin(-ROTSPEED) + v->diry * cos(-ROTSPEED);
+			old_planex = v->planex;
+			v->planex = v->planex * cos(-ROTSPEED) - v->planey * sin(-ROTSPEED);
+			v->planey = old_planex * sin(-ROTSPEED) + v->planey * cos(-ROTSPEED);
+		}
+		generate_next_frame(v);
 	}
 	return (SUCCESS);
 }
@@ -98,7 +98,7 @@ int	main(int argc, char **argv)
 {
 	t_env	v;
 
-	init_vars(&v);	
+	init_vars(&v);
 	if (argc != 2)
 		return (FAILURE);
 	if (parser(argv[1], &v) == FAILURE)
