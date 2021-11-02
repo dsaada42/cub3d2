@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:15:44 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 19:17:37 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/11/02 18:19:33 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	generate_next_frame(t_env *v)
 			&v->img.line_length, &v->img.endian);
 	raycast(v);
 	mlx_put_image_to_window(v->mlx, v->win, v->img.img, 0, 0);
-	mlx_destroy_image(v->mlx, v->img.img);
+        mlx_destroy_image(v->mlx, v->img.img);
 	return (SUCCESS);
 }
 
@@ -45,30 +45,30 @@ int	keypress_handler(int keycode, t_env *v)
 	{
 		if (keycode == W)
 		{
-			if (v->map[(int)(v->posx + v->dirx)][(int)(v->posy)] == '0')
+			if (v->map[(int)(v->posx + v->dirx / 5)][(int)(v->posy)] == '0')
 				v->posx += v->dirx / 10;
-			if (v->map[(int)(v->posx)][(int)(v->posy + v->diry)] == '0')
+			if (v->map[(int)(v->posx)][(int)(v->posy + v->diry / 5)] == '0')
 				v->posy += v->diry / 10;
 		}
 		else if (keycode == S)
 		{
-			if (v->map[(int)(v->posx - v->dirx)][(int)(v->posy)] == '0')
+			if (v->map[(int)(v->posx - v->dirx / 5)][(int)(v->posy)] == '0')
 				v->posx -= v->dirx / 10;
-			if (v->map[(int)(v->posx)][(int)(v->posy - v->diry)] == '0')
+			if (v->map[(int)(v->posx)][(int)(v->posy - v->diry / 5)] == '0')
 				v->posy -= v->diry / 10;
 		}
 		else if (keycode == D)
 		{
-			if (v->map[(int)(v->posx - v->diry)][(int)(v->posy)] == '0')
+			if (v->map[(int)(v->posx - v->diry / 5)][(int)(v->posy)] == '0')
 				v->posx += -v->diry / 10;
-			if (v->map[(int)(v->posx)][(int)(v->posy + v->dirx)] == '0')
+			if (v->map[(int)(v->posx)][(int)(v->posy + v->dirx / 5)] == '0')
 				v->posy += v->dirx / 10;
 		}
 		else if (keycode == A)
 		{
-			if (v->map[(int)(v->posx + v->diry)][(int)(v->posy)] == '0')
+			if (v->map[(int)(v->posx + v->diry / 5)][(int)(v->posy)] == '0')
 				v->posx += v->diry / 10;
-			if (v->map[(int)(v->posx)][(int)(v->posy - v->dirx)] == '0')
+			if (v->map[(int)(v->posx)][(int)(v->posy - v->dirx / 5)] == '0')
 				v->posy += -v->dirx / 10;
 		}
 		else if (keycode == RIGHT)

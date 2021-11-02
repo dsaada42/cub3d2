@@ -6,7 +6,7 @@
 #    By: dsaada <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 00:15:00 by dsaada            #+#    #+#              #
-#    Updated: 2021/10/28 17:31:48 by dsaada           ###   ########.fr        #
+#    Updated: 2021/11/02 17:56:42 by dsaada           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ OBJ = $(SRC:.c=.o)
 
 $(NAME): $(OBJ)
 	make -C $(MLX_PATH)
-	$(CC) $(OBJ) $(DEBUG) $(MLX_FLAG) -o $(NAME)
+	$(CC) $(OBJ) $(MLX_FLAG) -o $(NAME)
 
 all: $(NAME)
 
