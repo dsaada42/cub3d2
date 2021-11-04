@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:47:00 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 04:01:35 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/11/04 14:44:35 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	is_color(t_line *el)
 
 int	check_args(t_env *v)
 {
-	if (v->north && v->south && v->east && v->west && v->ceiling && v->floor)
+	if (v->north && v->south && v->east && v->west && (v->ceiling != -1) && (v->floor != -1))
 		return (SUCCESS);
 	else
 		return (FAILURE);

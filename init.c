@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 19:57:31 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 02:48:56 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/11/04 14:44:55 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	init_env(t_env *v)
 	v->south = NULL;
 	v->east = NULL;
 	v->west = NULL;
-	v->floor = 0;
-	v->ceiling = 0;
+	v->floor = -1;
+	v->ceiling = -1;
 	v->posx = 0;
 	v->posy = 0;
 	v->garb = init_list_garb();

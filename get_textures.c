@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:05:56 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 19:17:44 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/11/04 15:40:38 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	f_exist(char *str)
 	int	fd;
 
 	fd = open(str, O_RDONLY);
-	if (fd)
+	if (fd >= 0)
 	{
 		close(fd);
 		return (SUCCESS);

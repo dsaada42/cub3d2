@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:30:39 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 17:38:36 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/11/04 14:52:11 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,20 @@ int	parse_color(t_line *el, t_env *v)
 			res[cpt] = res[cpt] * 10 + el->buffer[i] - '0';
 			i++;
 		}
+		while (is_wspace(el->buffer[i]))
+			i++;
 		if (el->buffer[i] == ',')
 			i++;
 		else if (cpt < 2)
 			return (FAILURE);
+		if (res[cpt] < 0 || res[cpt] > 255)
+			return (FAILURE);
 		cpt++;
 	}
+	while (is_wspace(el->buffer[i]))
+		i++;
+	if (i != el->size)
+		return (FAILURE);
 	if (el->buffer[0] == 'C')
 		v->ceiling = res[2] + 256 * res[1] + 256 * 256 * res[0];
 	else

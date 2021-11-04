@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 23:15:44 by dsaada            #+#    #+#             */
-/*   Updated: 2021/11/02 18:19:33 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/11/04 15:40:34 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int	init_vars(t_env *v)
 {
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, WIDTH, HEIGHT, "Cub3d");
+	v->tex[0].img = NULL;
+	v->tex[1].img = NULL;
+	v->tex[2].img = NULL;
+	v->tex[3].img = NULL;
 	return (SUCCESS);
 }
 
@@ -37,8 +41,15 @@ int	keypress_handler(int keycode, t_env *v)
 
 	if (keycode == ESCAPE)
 	{
-		mlx_destroy_window(v->mlx, v->win);
+		free_garb(v->garb);
+		mlx_destroy_image(v->mlx, v->tex[0].img);
+		mlx_destroy_image(v->mlx, v->tex[1].img);
+		mlx_destroy_image(v->mlx, v->tex[2].img);
+		mlx_destroy_image(v->mlx, v->tex[3].img);
 		free_map(v);
+		mlx_destroy_window(v->mlx, v->win);
+                mlx_destroy_display(v->mlx);
+		free(v->mlx);
 		exit(0);
 	}
 	else
@@ -98,15 +109,26 @@ int	main(int argc, char **argv)
 {
 	t_env	v;
 
-	init_vars(&v);
 	if (argc != 2)
 		return (FAILURE);
 	if (parser(argv[1], &v) == FAILURE)
 		return (FAILURE);
+	init_vars(&v);
 	if (get_textures(&v) == FAILURE)
 	{
 		free_map(&v);
 		free_garb(v.garb);
+		if (v.tex[0].img)
+			mlx_destroy_image(v.mlx, v.tex[0].img);
+                if (v.tex[1].img)
+			mlx_destroy_image(v.mlx, v.tex[1].img);
+                if (v.tex[2].img)
+			mlx_destroy_image(v.mlx, v.tex[2].img);
+		if (v.tex[3].img)
+                	mlx_destroy_image(v.mlx, v.tex[3].img);
+		mlx_destroy_window(v.mlx, v.win);
+                mlx_destroy_display(v.mlx);
+		free(v.mlx);
 		return (FAILURE);
 	}
 	generate_next_frame(&v);
