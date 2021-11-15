@@ -6,7 +6,7 @@
 /*   By: dsaada <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:34:40 by dsaada            #+#    #+#             */
-/*   Updated: 2021/10/28 02:38:01 by dsaada           ###   ########.fr       */
+/*   Updated: 2021/11/15 14:39:41 by dsaada           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	if (!ft_strchr(stack, '\n'))
 	{
-		while ((rdcpt = read(fd, buffer, BUFFER_SIZE)) > 0)
+		rdcpt = read(fd, buffer, BUFFER_SIZE);
+		while (rdcpt > 0)
 		{
 			if (!(handle_stack(&stack, &tmp, buffer, rdcpt)))
 				return (-1);
 			if (ft_strchr(stack, '\n'))
 				break ;
+			rdcpt = read(fd, buffer, BUFFER_SIZE);
 		}
 	}
 	return (manage_output(&stack, line, rdcpt));
@@ -40,18 +42,21 @@ int	handle_stack(char **stack, char **tmp, char *buffer, int rdcpt)
 	buffer[rdcpt] = '\0';
 	if (!(*stack))
 	{
-		if (!(*stack = ft_strdup(buffer)))
+		*stack = ft_strdup(buffer);
+		if (!(*stack))
 			return (-1);
 	}
 	else
 	{
-		if (!(*tmp = ft_strjoin(*stack, buffer)))
+		*tmp = ft_strjoin(*stack, buffer);
+		if (!(*tmp))
 		{
 			free(*stack);
 			return (-1);
 		}
 		free(*stack);
-		if (!(*stack = ft_strdup(*tmp)))
+		*stack = ft_strdup(*tmp);
+		if (!(*stack))
 		{
 			free(*tmp);
 			return (-1);
@@ -67,7 +72,8 @@ int	manage_output(char **stack, char **line, int rdcpt)
 		return (-1);
 	if (rdcpt == 0 && *stack == NULL)
 	{
-		if (!(*line = ft_strdup("")))
+		*line = ft_strdup("");
+		if (!(*line))
 			return (-1);
 		return (0);
 	}
@@ -77,12 +83,14 @@ int	manage_output(char **stack, char **line, int rdcpt)
 
 int	handle_line(char **stack, char **line, char **tmp, int end)
 {
-	if (!(*line = ft_substr(*stack, 0, end)))
+	*line = ft_substr(*stack, 0, end);
+	if (!(*line))
 	{
 		free(*stack);
 		return (-1);
 	}
-	if (!(*tmp = ft_strdup((*stack) + end + 1)))
+	*tmp = ft_strdup((*stack) + end + 1);
+	if (!(*tmp))
 	{
 		free(*stack);
 		return (-1);
@@ -106,7 +114,8 @@ int	extract_line(char **stack, char **line)
 	}
 	else
 	{
-		if (!(*line = ft_strdup(*stack)))
+		*line = ft_strdup(*stack);
+		if (!(*line))
 		{
 			free(*stack);
 			return (-1);
