@@ -6,7 +6,7 @@
 #    By: dsaada <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 00:15:00 by dsaada            #+#    #+#              #
-#    Updated: 2021/11/15 14:44:08 by dsaada           ###   ########.fr        #
+#    Updated: 2021/12/07 15:01:15 by dsaada           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,27 +22,28 @@ CFLAGS = -Wall -Wextra -Werror
 
 DEBUG = -g3 -fsanitize=address
 
-SRC = main.c\
-      init.c\
-      utils.c\
-      parser.c\
-      parser_utils.c\
-      list.c\
-      garb.c\
-      map.c\
-      map_check.c\
-      get_textures.c\
-      get_next_line.c\
-      get_next_line_utils.c\
-      raycast.c\
-      drawing.c
+SRC = ./src/main.c\
+      ./src/init.c\
+      ./src/utils.c\
+      ./src/parser.c\
+      ./src/parser_utils.c\
+      ./src/list.c\
+      ./src/garb.c\
+      ./src/map.c\
+      ./src/map_check.c\
+      ./src/get_textures.c\
+      ./src/get_next_line.c\
+      ./src/get_next_line_utils.c\
+      ./src/raycast.c\
+      ./src/drawing.c\
+	  ./src/shade.c
 
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -lmlx_linux -O3 -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) ./src/cub3d.h ./src/get_next_line.h
 	make -C $(MLX_PATH)
 	$(CC) $(OBJ) $(MLX_FLAG) -o $(NAME)
 
@@ -50,7 +51,7 @@ all: $(NAME)
 
 clean:
 	make -C $(MLX_PATH) clean
-	rm -f *.o
+	rm -f ./src/*.o
 
 fclean: clean
 	rm -f $(NAME)
